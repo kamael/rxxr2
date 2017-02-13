@@ -1,7 +1,10 @@
 This is a clone of http://www.cs.bham.ac.uk/~hxt/research/rxxr2/ as of
-2016-11-22 My hope is to add support for the few features missing to run the
-code on all the regexes in the Superhuman email client. PR's welcome :).
 
+修改了编译脚本，添加了ocaml的merlin支持，方便IDE里查看代码和调试。
+
+同时代码添加了注释，方便自己理解。
+
+分析文档：[http://blog.12.rs/REDoS-paper/](http://blog.12.rs/REDoS-paper/)
 
 + code/
   - source code for RXXR
