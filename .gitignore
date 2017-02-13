@@ -1,4 +1,5 @@
 code/*.cmi
-code/*.cmto
-code/*cmo
+code/*.cmti
+code/*.cmo
+code/*.cmt
 scan.bin

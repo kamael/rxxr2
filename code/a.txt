@@ -1,0 +1,3 @@
+# Vulnerable
+/z([b-e]kkk|flll|[c-e]mmm|[a-c]nnn|[a-f]ooo)zz(a|ab|b)*kk/
+
