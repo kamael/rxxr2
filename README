@@ -4,7 +4,7 @@ This is a clone of http://www.cs.bham.ac.uk/~hxt/research/rxxr2/ as of
 
 同时代码添加了注释，方便自己理解。
 
-分析文档：[http://blog.12.rs/REDoS-paper/](http://blog.12.rs/REDoS-paper/)
+分析文档：http://blog.12.rs/REDoS-paper/
 
 + code/
   - source code for RXXR
