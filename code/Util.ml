@@ -23,6 +23,7 @@ let find_kleene nfa =
   snd (explore (Nfa.root nfa) (IntSet.empty, []));;
 
 (* collect all the branch points within a given kleene expression *)
+(* eg: return ([(11, (3, 12)), (4, (5, 6))]); *)
 let find_branches nfa ik =
   let rec explore i (st, lst) =
     if IntSet.mem i st then (st, lst) else
@@ -94,7 +95,8 @@ let xtr_collect tr =
     |XTNode (u, v, l1, l2, ltr, rtr) ->
       (* here we compute the cartesian product of the two state vectors, but we discard the ordering *)
       explore ltr; explore rtr; List.fold_left (fun _ i -> List.fold_left (fun _ j -> Hashtbl.add t_tbl (min i j, max i j) (u, v)) () l2) () l1 in
-  explore tr; t_tbl;;
+  explore tr;
+  t_tbl;;
 
 (* find all parallel transitions for the specified state pair *)
 let get_parallel_transitions nfa ik (i1, i2) =
@@ -133,11 +135,13 @@ let find_pumpable_kleene nfa =
   (* filter out innner branches with parallel paths leading to a common state *)
   let rec filter_converging_branches ik blist = match blist with
     [] -> []
+    (* i: 分支节点；p: 两个分支的tuple *)
     |(i, p) :: t -> let tf = filter_converging_branches ik t in if (check_convergence ik [p] ProductSet.empty) then i :: tf else tf in
   (* analyse each kleene for pumpability *)
   let rec explore klns = match klns with
     [] -> ()
     |ik :: t ->
+      (* ik表示某一个kleen节点 *)
       (* collect pumpable kleene states along with the corresponding branch points *)
       let br_set = List.fold_left (fun s i -> IntSet.add i s) IntSet.empty (filter_converging_branches ik (find_branches nfa ik)) in
       let _ = if not (IntSet.is_empty br_set) then Hashtbl.add result ik br_set else () in

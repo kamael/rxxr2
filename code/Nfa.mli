@@ -28,7 +28,16 @@ type s =
   |BranchKln of bool * int * int;;
 
 (* inner type used to represent the NFA *)
-type t;;
+type t = {
+  (* states are store in an array, each array index identifies a state *)
+  states : s array; 
+  (* an ordered list of transitions corresponding to each state - lazily initialized *)
+  transitions : (char * char * int) list option array; 
+  (* sub-expression positions corresponding to each state *)
+  positions : (int * int) array; 
+  (* root state index *)
+  root : int 
+};;
 
 (* compile a pattern into an NFA *)
 val make : ParsingData.pattern -> t;;

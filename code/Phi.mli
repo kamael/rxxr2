@@ -3,7 +3,7 @@
 open Common
 
 (* internal representation of phi *)
-type t;;
+type t = IntSet.t;;
 
 module PhiSet : (Set.S with type elt = t);;
 

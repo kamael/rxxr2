@@ -38,6 +38,16 @@ let init nfa kset = {
 };;
 
 let next m =
+  (*
+    evolve 示例： ([('z', 'z')], [1]) 
+
+    从 evolve = [([], [0])] 开始迭代，调用 Beta.evolve 消除\epsilon
+    然后将处理的元素放进advance，利用 Beta.advance 求解前缀。
+    遇到hits(捕获 kleene 元素)，则调用 Phi.evolve 处理，消除\epsilon得到后继
+
+    然后返回 (kleene的元素序号，前缀，所有后缀)
+
+  *)
   let rec explore () = match (m.hits, m.evolve, m.advance) with
     (* process hits *)
     |((ik, b) :: t, _, _) ->
@@ -49,6 +59,9 @@ let next m =
         Some (ik, m.w, ep)
       ) else explore ()
     |([], (w, b) :: t, _) ->
+    (*
+      w 为字符范围，b 为 NFA 的序号
+    *)
       m.evolve <- t;
       m.w <- w;
       (* look for hits *)

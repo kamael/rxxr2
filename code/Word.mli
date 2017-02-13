@@ -1,7 +1,7 @@
 (* © Copyright University of Birmingham, UK *)
 
 (* internal representation of a word *)
-type t;;
+type t = (char * char) list;;
 
 (* empty word - epsilon *)
 val empty : t;;

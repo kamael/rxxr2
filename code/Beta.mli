@@ -3,7 +3,7 @@
 open Common
 
 (* internal representation of beta *)
-type t;;
+type t = int list;;
 
 module BetaSet : (Set.S with type elt = t);;
 

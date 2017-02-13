@@ -1,7 +1,7 @@
 (* © Copyright University of Birmingham, UK *)
 
 (* internal representation of flags *)
-type t;;
+type t = int;;
 
 (* various flags used during the analysis phase *)
 val empty : t;;
